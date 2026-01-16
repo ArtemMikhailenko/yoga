@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         hostname: 'yoga.holodfood.kiev.ua',
         pathname: '/wp-content/uploads/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        pathname: '/**',
+      },
     ],
   },
 };

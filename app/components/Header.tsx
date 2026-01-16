@@ -15,7 +15,7 @@ export default function Header() {
         {/* Logo */}
         <Link href="/" className="text-white text-xl font-light tracking-[0.3em] hover:opacity-80 transition-opacity">
           <Image
-                         src="images/logo.svg"
+                         src="/images/logo.svg"
                          alt="YC Logo"
                          width={90}
                          height={90}
@@ -44,6 +44,13 @@ export default function Header() {
             className="text-white/80 hover:text-white transition-all text-sm font-light tracking-wide relative group"
           >
             {t.header.nav.author}
+            <span className="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all group-hover:w-full"></span>
+          </Link>
+          <Link 
+            href="/retreats" 
+            className="text-white/80 hover:text-white transition-all text-sm font-light tracking-wide relative group"
+          >
+            {t.header.nav.retreats}
             <span className="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all group-hover:w-full"></span>
           </Link>
           <Link 
@@ -124,6 +131,13 @@ export default function Header() {
               onClick={() => setIsMenuOpen(false)}
             >
               {t.header.nav.author}
+            </Link>
+            <Link 
+              href="/retreats" 
+              className="text-white/90 hover:text-white transition-colors text-base font-light"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {t.header.nav.retreats}
             </Link>
             <Link 
               href="/contact" 
