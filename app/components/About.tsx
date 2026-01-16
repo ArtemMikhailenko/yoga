@@ -30,7 +30,7 @@ export default function About() {
             <div className="absolute bottom-0 right-0 w-24 h-24 border-b-2 border-r-2 border-[#c9b896]/40 rounded-br-[2rem] z-20" />
             
             <Image
-              src="/images/hero/second.png"
+              src="/images/curse/IMG_6142.JPG"
               alt="Yoga pose"
               fill
               className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000 ease-out"
@@ -91,7 +91,7 @@ export default function About() {
             <div className="absolute bottom-0 left-0 w-24 h-24 border-b-2 border-l-2 border-[#c9b896]/40 rounded-bl-[2rem] z-20" />
             
             <Image
-              src="/images/hero/three.jpg"
+              src="/images/hero/IMG_6155.JPG"
               alt="Yoga meditation"
               fill
               className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000 ease-out"

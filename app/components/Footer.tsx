@@ -114,38 +114,38 @@ export default function Footer() {
               <ul className="space-y-3">
                 <li>
                   <a
-                    href="tel:+79001460506"
+                    href="tel:+436776277095 4"
                     className="text-sm text-[#3a3a35]/70 hover:text-[#3a3a35] transition-colors font-light"
                   >
-                    +7 (900) 146-05-06
+                    {t.footer.phone}
                   </a>
                 </li>
                 <li>
                   <a
-                    href="mailto:YC@mail.ru"
+                    href="mailto:vladybookings@gmail.com"
                     className="text-sm text-[#3a3a35]/70 hover:text-[#3a3a35] transition-colors font-light"
                   >
-                    YC@mail.ru
+                    {t.footer.email}
                   </a>
                 </li>
                 <li>
                   <a
-                    href="https://vk.com"
+                    href="https://t.me/yoga_with_vlady"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm text-[#3a3a35]/70 hover:text-[#3a3a35] transition-colors font-light"
                   >
-                    {t.footer.vkontakte}
+                    {t.footer.telegram}
                   </a>
                 </li>
                 <li>
                   <a
-                    href="https://youtube.com"
+                    href="https://instagram.com/yoga_s_vladislavom"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm text-[#3a3a35]/70 hover:text-[#3a3a35] transition-colors font-light"
                   >
-                    YouTube
+                    {t.footer.instagram}
                   </a>
                 </li>
               </ul>

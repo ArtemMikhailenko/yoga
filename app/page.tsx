@@ -7,6 +7,7 @@ import Teacher from "./components/Teacher";
 import Classes from "./components/Classes";
 import Benefits from "./components/Benefits";
 import FAQ from "./components/FAQ";
+import Pricing from "./components/Pricing";
 import Footer from "./components/Footer";
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
         <AsanaMarquee />
         <Teacher />
         <Classes />
+        <Pricing />
         <Benefits />
         <FAQ />
       </main>

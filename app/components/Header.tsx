@@ -26,31 +26,31 @@ export default function Header() {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-10">
           <Link 
-            href="#program" 
+            href="/" 
+            className="text-white/80 hover:text-white transition-all text-sm font-light tracking-wide relative group"
+          >
+            {t.header.nav.home || 'Home'}
+            <span className="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all group-hover:w-full"></span>
+          </Link>
+          <Link 
+            href="/courses" 
             className="text-white/80 hover:text-white transition-all text-sm font-light tracking-wide relative group"
           >
             {t.header.nav.program}
             <span className="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all group-hover:w-full"></span>
           </Link>
           <Link 
-            href="#author" 
+            href="/about" 
             className="text-white/80 hover:text-white transition-all text-sm font-light tracking-wide relative group"
           >
             {t.header.nav.author}
             <span className="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all group-hover:w-full"></span>
           </Link>
           <Link 
-            href="#pricing" 
+            href="/contact" 
             className="text-white/80 hover:text-white transition-all text-sm font-light tracking-wide relative group"
           >
-            {t.header.nav.pricing}
-            <span className="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all group-hover:w-full"></span>
-          </Link>
-          <Link 
-            href="#reviews" 
-            className="text-white/80 hover:text-white transition-all text-sm font-light tracking-wide relative group"
-          >
-            {t.header.nav.reviews}
+            {t.header.nav.contacts}
             <span className="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all group-hover:w-full"></span>
           </Link>
           
@@ -105,32 +105,32 @@ export default function Header() {
         <nav className="md:hidden bg-[#5c5c54] border-t border-white/10">
           <div className="container mx-auto px-6 py-4 flex flex-col gap-4">
             <Link 
-              href="#program" 
+              href="/" 
+              className="text-white/90 hover:text-white transition-colors text-base font-light"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {t.header.nav.home || 'Home'}
+            </Link>
+            <Link 
+              href="/courses" 
               className="text-white/90 hover:text-white transition-colors text-base font-light"
               onClick={() => setIsMenuOpen(false)}
             >
               {t.header.nav.program}
             </Link>
             <Link 
-              href="#author" 
+              href="/about" 
               className="text-white/90 hover:text-white transition-colors text-base font-light"
               onClick={() => setIsMenuOpen(false)}
             >
               {t.header.nav.author}
             </Link>
             <Link 
-              href="#pricing" 
+              href="/contact" 
               className="text-white/90 hover:text-white transition-colors text-base font-light"
               onClick={() => setIsMenuOpen(false)}
             >
-              {t.header.nav.pricing}
-            </Link>
-            <Link 
-              href="#reviews" 
-              className="text-white/90 hover:text-white transition-colors text-base font-light"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {t.header.nav.reviews}
+              {t.header.nav.contacts}
             </Link>
             
             {/* Language Switcher Mobile */}
