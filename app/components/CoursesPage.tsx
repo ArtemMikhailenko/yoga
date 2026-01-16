@@ -361,13 +361,13 @@ export default function CoursesPage() {
             <div className="lg:col-span-2 bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-2xl space-y-6">
               {/* Service Selection */}
               <div>
-                <h4 className="text-lg font-light text-white mb-4">{t.coursesPage?.selectService}</h4>
+                <h4 className="text-lg font-light text-white mb-4">{(t.coursesPage as any)?.selectService || 'Select Service'}</h4>
                 <select
                   value={selectedService}
                   onChange={(e) => setSelectedService(e.target.value)}
                   className="w-full py-3 px-4 rounded-lg text-sm font-light bg-white/5 text-white border border-white/20 focus:border-[#c9b896] focus:outline-none transition-all"
                 >
-                  <option value="" className="bg-[#3a3a35]">{t.coursesPage?.chooseService}</option>
+                  <option value="" className="bg-[#3a3a35]">{(t.coursesPage as any)?.chooseService || 'Choose service'}</option>
                   {services.map((service) => (
                     <option key={service.id} value={service.id} className="bg-[#3a3a35]">
                       {service.name}
@@ -402,17 +402,17 @@ export default function CoursesPage() {
                         onClick={handleBooking}
                         className="w-full mt-6 py-4 bg-[#c9b896] text-[#3a3a35] rounded-lg font-light hover:bg-white transition-colors"
                       >
-                        {t.coursesPage?.confirmBooking}
+                        {(t.coursesPage as any)?.confirmBooking || 'Confirm Booking'}
                       </button>
                     )}
                   </div>
                 ) : (
                   <p className="text-white/50 text-sm font-light">
                     {!selectedDate && !selectedService 
-                      ? t.coursesPage?.selectDateAndService
+                      ? (t.coursesPage as any)?.selectDateAndService || 'Select date and service'
                       : !selectedDate 
-                        ? t.coursesPage?.selectDate 
-                        : t.coursesPage?.selectServiceFirst
+                        ? (t.coursesPage as any)?.selectDate || 'Please select a date first'
+                        : (t.coursesPage as any)?.selectServiceFirst || 'Please select a service first'
                     }
                   </p>
                 )}

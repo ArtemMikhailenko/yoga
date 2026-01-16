@@ -5,12 +5,11 @@ import { ru } from '../locales/ru';
 import { en } from '../locales/en';
 
 type Language = 'ru' | 'en';
-type Translations = typeof ru | typeof en;
 
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: Translations;
+  t: typeof ru;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -26,7 +25,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const value = {
     language,
     setLanguage,
-    t: translations[language],
+    t: translations[language] as typeof ru,
   };
 
   return (
