@@ -32,25 +32,25 @@ export default function Hero() {
             </p>
             
             {/* Main Title - Large Text */}
-            <h1 className="text-[100px] sm:text-[150px] lg:text-[200px] xl:text-[250px] font-thin text-white/95 leading-none tracking-[0.2em]">
+            <h1 className="text-[60px] sm:text-[100px] md:text-[150px] lg:text-[200px] xl:text-[250px] font-thin text-white/95 leading-none tracking-[0.1em] sm:tracking-[0.2em]">
               {t.hero.title}
             </h1>
             
             {/* Author Name */}
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-white/95 tracking-wide">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-white/95 tracking-wide">
               {t.hero.author}
             </h2>
             
             {/* Description */}
-            <p className="text-base sm:text-lg lg:text-xl text-white/80 leading-relaxed font-light max-w-3xl">
+            <p className="text-sm sm:text-base lg:text-xl text-white/80 leading-relaxed font-light max-w-3xl px-4 sm:px-0">
               {t.hero.description}
             </p>
             
             {/* CTA Button */}
-            <div className="pt-6">
+            <div className="pt-4 sm:pt-6">
               <Link
                 href="#program"
-                className="group inline-flex items-center gap-3 px-12 py-3.5 border border-white/60 text-white hover:bg-white hover:text-black transition-all duration-500 font-light tracking-[0.2em] text-sm backdrop-blur-sm"
+                className="group inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-12 py-3 sm:py-3.5 border border-white/60 text-white hover:bg-white hover:text-black transition-all duration-500 font-light tracking-[0.1em] sm:tracking-[0.2em] text-xs sm:text-sm backdrop-blur-sm"
               >
                 {t.hero.cta}
                 <svg

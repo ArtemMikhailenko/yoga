@@ -27,32 +27,32 @@ export default function Pricing() {
   ];
 
   return (
-    <section className="relative w-full h-screen bg-[#e8e6e0] py-16 px-6 lg:px-20 flex items-center">
+    <section className="relative w-full min-h-screen lg:h-screen bg-[#e8e6e0] py-16 sm:py-16 px-4 sm:px-6 lg:px-20 flex items-center">
       <div className="max-w-7xl mx-auto w-full">
         {/* Title */}
-        <h2 className="text-4xl lg:text-6xl font-light text-[#3a3a35] mb-12 lg:mb-16">
+        <h2 className="text-3xl sm:text-4xl lg:text-6xl font-light text-[#3a3a35] mb-8 sm:mb-12 lg:mb-16">
           {t.pricing.title}
         </h2>
 
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
           {plans.map((plan, index) => (
             <div
               key={index}
               className="border border-[#3a3a35]/20 bg-white/50 flex flex-col"
             >
               {/* Card Header */}
-              <div className="border-b border-[#3a3a35]/20 p-6 lg:p-8">
-                <div className="text-6xl lg:text-7xl font-light text-[#3a3a35]/30 mb-4">
+              <div className="border-b border-[#3a3a35]/20 p-4 sm:p-6 lg:p-8">
+                <div className="text-4xl sm:text-6xl lg:text-7xl font-light text-[#3a3a35]/30 mb-2 sm:mb-4">
                   {plan.number}
                 </div>
-                <h3 className="text-lg lg:text-xl font-light text-[#3a3a35] tracking-wide uppercase">
+                <h3 className="text-base sm:text-lg lg:text-xl font-light text-[#3a3a35] tracking-wide uppercase">
                   {plan.name}
                 </h3>
               </div>
 
               {/* Card Features */}
-              <div className="flex-1 p-6 lg:p-8">
+              <div className="flex-1 p-4 sm:p-6 lg:p-8">
                 <ul className="space-y-3">
                   {plan.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-3">

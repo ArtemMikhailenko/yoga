@@ -33,23 +33,23 @@ export default function FAQ() {
 
   return (
     <section className="relative w-full min-h-screen bg-[#e8e6e0]">
-      <div className="max-w-7xl mx-auto px-6 lg:px-20 py-20 lg:py-32">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-20 py-12 sm:py-20 lg:py-32">
         {/* Top Section - Title and Image */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start mb-16 lg:mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-16 lg:gap-20 items-start mb-10 sm:mb-16 lg:mb-20">
           {/* Left - Title */}
           <div>
-            <h2 className="text-5xl lg:text-6xl xl:text-7xl font-light text-[#3a3a35] mb-6">
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-[#3a3a35] mb-4 sm:mb-6">
               {t.faq.title}
             </h2>
-            <p className="text-base lg:text-lg text-[#3a3a35]/60 font-light leading-relaxed max-w-lg">
+            <p className="text-sm sm:text-base lg:text-lg text-[#3a3a35]/60 font-light leading-relaxed max-w-lg">
               {t.faq.description}
             </p>
           </div>
 
           {/* Right - Image */}
-          <div className="relative h-[400px] lg:h-[500px]">
+          <div className="relative h-[250px] sm:h-[400px] lg:h-[500px] rounded-2xl overflow-hidden">
             <Image
-              src="https://yoga.holodfood.kiev.ua/wp-content/uploads/2025/12/SnapInsta.to_528275816_18370835953197209_7675333427214993366_n.jpg"
+              src="/images/curse/IMG_6144.JPG"
               alt="Yoga Practice"
               fill
               className="object-cover grayscale"
@@ -67,19 +67,19 @@ export default function FAQ() {
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full py-8 lg:py-10 flex items-start justify-between gap-8 group transition-all duration-200"
+                className="w-full py-5 sm:py-8 lg:py-10 flex items-start justify-between gap-4 sm:gap-8 group transition-all duration-200"
               >
-                <div className="flex items-start gap-6 lg:gap-8 flex-1 text-left">
+                <div className="flex items-start gap-3 sm:gap-6 lg:gap-8 flex-1 text-left">
                   {/* Circle Number */}
-                  <div className="flex-shrink-0 w-12 h-12 lg:w-14 lg:h-14 rounded-full border border-[#c9b896] flex items-center justify-center group-hover:bg-[#c9b896] transition-all duration-300">
-                    <span className="text-[#3a3a35]/60 group-hover:text-white text-sm font-light transition-colors duration-300">
+                  <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full border border-[#c9b896] flex items-center justify-center group-hover:bg-[#c9b896] transition-all duration-300">
+                    <span className="text-[#3a3a35]/60 group-hover:text-white text-xs sm:text-sm font-light transition-colors duration-300">
                       {String(index + 1).padStart(2, '0')}
                     </span>
                   </div>
 
                   {/* Content */}
                   <div className="flex-1">
-                    <h3 className="text-xl lg:text-2xl xl:text-3xl font-light text-[#3a3a35] mb-4 leading-snug">
+                    <h3 className="text-base sm:text-xl lg:text-2xl xl:text-3xl font-light text-[#3a3a35] mb-2 sm:mb-4 leading-snug">
                       {faq.question}
                     </h3>
 
@@ -104,10 +104,10 @@ export default function FAQ() {
                 </div>
 
                 {/* Plus/Minus Icon */}
-                <div className="flex-shrink-0 mt-2">
-                  <div className="w-12 h-12 lg:w-14 lg:h-14 rounded-full border border-[#c9b896] flex items-center justify-center group-hover:bg-[#c9b896] transition-all duration-300">
+                <div className="flex-shrink-0 mt-1 sm:mt-2">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full border border-[#c9b896] flex items-center justify-center group-hover:bg-[#c9b896] transition-all duration-300">
                     <svg
-                      className="w-5 h-5 lg:w-6 lg:h-6 text-[#3a3a35]/60 group-hover:text-white transition-all duration-300"
+                      className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-[#3a3a35]/60 group-hover:text-white transition-all duration-300"
                       style={{
                         transform: openIndex === index ? 'rotate(45deg)' : 'rotate(0deg)',
                       }}

@@ -6,17 +6,17 @@ export default function Benefits() {
   const { t } = useLanguage();
 
   return (
-    <section className="relative w-full h-screen bg-[#e8e6e0] px-6 lg:px-20 flex items-center">
+    <section className="relative w-full min-h-screen lg:h-screen bg-[#e8e6e0] px-4 sm:px-6 lg:px-20 py-16 lg:py-0 flex items-center">
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center h-full">
           {/* Left Side - Content */}
-          <div className="lg:col-span-5 space-y-8">
+          <div className="lg:col-span-5 space-y-6 sm:space-y-8 order-2 lg:order-1">
             {/* Mind Calming Block */}
-            <div className="flex items-start gap-6">
+            <div className="flex items-start gap-4 sm:gap-6">
               {/* Icon */}
-              <div className="flex-shrink-0 w-14 h-14 rounded-full bg-[#c9b896] flex items-center justify-center mt-2">
+              <div className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#c9b896] flex items-center justify-center mt-1 sm:mt-2">
                 <svg
-                  className="w-7 h-7 text-white"
+                  className="w-6 h-6 sm:w-7 sm:h-7 text-white"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                 >
@@ -25,7 +25,7 @@ export default function Benefits() {
               </div>
               
               <div className="flex-1">
-                <h3 className="text-3xl lg:text-4xl font-serif text-[#3a3a35] mb-3 leading-tight">
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#3a3a35] mb-2 sm:mb-3 leading-tight">
                   {t.benefits.mindCalming.title}
                 </h3>
                 <p className="text-sm lg:text-base text-[#3a3a35]/70 leading-relaxed font-light">
@@ -35,14 +35,14 @@ export default function Benefits() {
             </div>
 
             {/* Divider */}
-            <div className="w-24 h-px bg-[#c9b896]/40 ml-20" />
+            <div className="w-16 sm:w-24 h-px bg-[#c9b896]/40 ml-16 sm:ml-20" />
 
             {/* Relaxing Music Block */}
-            <div className="flex items-start gap-6">
+            <div className="flex items-start gap-4 sm:gap-6">
               {/* Icon */}
-              <div className="flex-shrink-0 w-14 h-14 rounded-full bg-[#c9b896] flex items-center justify-center mt-2">
+              <div className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#c9b896] flex items-center justify-center mt-1 sm:mt-2">
                 <svg
-                  className="w-7 h-7 text-white"
+                  className="w-6 h-6 sm:w-7 sm:h-7 text-white"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                 >
@@ -51,7 +51,7 @@ export default function Benefits() {
               </div>
               
               <div className="flex-1">
-                <h3 className="text-3xl lg:text-4xl font-serif text-[#3a3a35] mb-3 leading-tight">
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#3a3a35] mb-2 sm:mb-3 leading-tight">
                   {t.benefits.relaxingMusic.title}
                 </h3>
                 <p className="text-sm lg:text-base text-[#3a3a35]/70 leading-relaxed font-light">
@@ -62,8 +62,8 @@ export default function Benefits() {
           </div>
 
           {/* Right Side - Video */}
-          <div className="lg:col-span-7 h-full flex items-center">
-            <div className="relative w-full h-[85vh] overflow-hidden">
+          <div className="lg:col-span-7 h-full flex items-center order-1 lg:order-2">
+            <div className="relative w-full h-[50vh] sm:h-[60vh] lg:h-[85vh] overflow-hidden rounded-2xl lg:rounded-none">
               <video
                 autoPlay
                 loop

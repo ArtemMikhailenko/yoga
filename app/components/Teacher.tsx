@@ -7,10 +7,10 @@ export default function Teacher() {
   const { t } = useLanguage();
 
   return (
-    <section className="relative w-full h-screen overflow-hidden bg-[#e8e6e0]">
+    <section className="relative w-full min-h-screen lg:h-screen overflow-hidden bg-[#e8e6e0]">
       <div className="grid grid-cols-1 lg:grid-cols-2 h-full">
         {/* Left Side - Video */}
-        <div className="relative h-full w-full">
+        <div className="relative h-[40vh] sm:h-[50vh] lg:h-full w-full">
           <video
             autoPlay
             loop
@@ -23,7 +23,7 @@ export default function Teacher() {
         </div>
 
         {/* Right Side - Content */}
-        <div className="relative flex items-center justify-center px-12 lg:px-20">
+        <div className="relative flex items-center justify-center px-6 sm:px-12 lg:px-20 py-10 lg:py-0">
           <div className="max-w-2xl w-full">
             {/* Small labels */}
             <div className="flex items-center gap-4 mb-8 opacity-60">
@@ -36,16 +36,16 @@ export default function Teacher() {
             </div>
 
             {/* Title */}
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-light text-[#2a2a25] leading-tight mb-4">
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-[#2a2a25] leading-tight mb-2 sm:mb-4">
               {t.teacher.title1}
             </h2>
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-serif italic text-[#2a2a25] leading-tight mb-10">
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-serif italic text-[#2a2a25] leading-tight mb-6 sm:mb-10">
               {t.teacher.title2}
             </h2>
             
             {/* Description */}
-            <div className="border-l border-[#c9b896]/40 pl-6 mb-10">
-              <p className="text-base text-[#5c5c54] leading-relaxed font-light">
+            <div className="border-l border-[#c9b896]/40 pl-4 sm:pl-6 mb-6 sm:mb-10">
+              <p className="text-sm sm:text-base text-[#5c5c54] leading-relaxed font-light">
                 {t.teacher.description}
               </p>
             </div>
@@ -53,7 +53,7 @@ export default function Teacher() {
             {/* CTA Button */}
             <Link
               href="#schedule"
-              className="inline-flex items-center gap-3 px-10 py-3.5 bg-[#2a2a25] text-white hover:bg-[#3a3a35] transition-colors duration-300 font-light tracking-[0.15em] text-sm"
+              className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-3.5 bg-[#2a2a25] text-white hover:bg-[#3a3a35] transition-colors duration-300 font-light tracking-[0.1em] sm:tracking-[0.15em] text-xs sm:text-sm"
             >
               {t.teacher.cta}
               <svg
@@ -70,11 +70,11 @@ export default function Teacher() {
             </Link>
 
             {/* Bottom label */}
-            <div className="mt-16 flex items-center gap-3 opacity-50">
-              <svg className="w-5 h-5 text-[#c9b896]" viewBox="0 0 24 24" fill="currentColor">
+            <div className="mt-8 sm:mt-16 flex items-center gap-3 opacity-50">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#c9b896]" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z" />
               </svg>
-              <span className="text-xs uppercase tracking-[0.25em] text-[#5c5c54]">
+              <span className="text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#5c5c54]">
                 Yoga Practice
               </span>
             </div>

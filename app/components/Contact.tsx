@@ -27,22 +27,22 @@ export default function Contact() {
   };
 
   return (
-    <section className="relative w-full h-screen bg-[#e8e6e0] py-12 px-6 lg:px-20 flex items-center">
+    <section className="relative w-full min-h-screen lg:h-screen bg-[#e8e6e0] py-24 sm:py-12 px-4 sm:px-6 lg:px-20 flex items-center">
       {/* Decorative background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 right-20 w-96 h-96 bg-[#c9b896]/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-20 w-96 h-96 bg-[#c9b896]/10 rounded-full blur-3xl" />
+        <div className="absolute top-20 right-10 sm:right-20 w-48 sm:w-96 h-48 sm:h-96 bg-[#c9b896]/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-10 sm:left-20 w-48 sm:w-96 h-48 sm:h-96 bg-[#c9b896]/10 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12">
           {/* Left Side - Contact Information */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="lg:col-span-5 space-y-4 sm:space-y-6">
             <div>
-              <h2 className="text-4xl lg:text-5xl font-light text-[#3a3a35] mb-4 leading-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-[#3a3a35] mb-3 sm:mb-4 leading-tight">
                 {t.contact.title}
               </h2>
-              <p className="text-sm text-[#3a3a35]/60 font-light leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#3a3a35]/60 font-light leading-relaxed">
                 {t.contact.description}
               </p>
             </div>
