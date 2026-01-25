@@ -233,7 +233,7 @@ export const ru = {
     selectDate: "Пожалуйста, сначала выберите дату",
     selectServiceFirst: "Пожалуйста, сначала выберите услугу",
     selectDateAndService: "Выберите дату и услугу",
-    confirmBooking: "Забронировать в Google Calendar",
+    confirmBooking: "Оплатить онлайн",
     retreatsCtaTitle: "Интересуют Ретриты?",
     retreatsCtaDescription: "Испытайте глубокую трансформацию через наши погружающие ретриты йоги в священных местах",
     retreatsCtaButton: "Посмотреть Ретриты",

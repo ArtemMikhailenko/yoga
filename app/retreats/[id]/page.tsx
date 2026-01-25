@@ -49,12 +49,68 @@ interface Retreat {
   maxParticipants?: number;
 }
 
+// Parse price string to get numeric value
+function parsePrice(priceStr: string): number {
+  const match = priceStr.match(/[\d.,]+/);
+  if (match) {
+    return parseFloat(match[0].replace(',', '.'));
+  }
+  return 0;
+}
+
+// Get currency from price string
+function getCurrency(priceStr: string): string {
+  if (priceStr.includes('€') || priceStr.toLowerCase().includes('eur')) return 'EUR';
+  if (priceStr.includes('₴') || priceStr.toLowerCase().includes('uah')) return 'UAH';
+  if (priceStr.includes('$') || priceStr.toLowerCase().includes('usd')) return 'USD';
+  return 'EUR';
+}
+
 export default function RetreatDetail() {
   const params = useParams();
   const { t, language } = useLanguage();
   const [retreat, setRetreat] = useState<Retreat | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showBookingModal, setShowBookingModal] = useState(false);
+  const [bookingForm, setBookingForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+  });
+  const [bookingLoading, setBookingLoading] = useState(false);
+  const [bookingError, setBookingError] = useState('');
   const id = params.id as string;
+
+  const bookingTexts = {
+    ru: {
+      title: 'Забронировать ретрит',
+      name: 'Ваше имя',
+      email: 'Email',
+      phone: 'Телефон (необязательно)',
+      payNow: 'Оплатить сейчас',
+      processing: 'Обработка...',
+      cancel: 'Отмена',
+      total: 'К оплате',
+      secure: 'Безопасная оплата через Fondy',
+      error: 'Произошла ошибка. Попробуйте еще раз.',
+      required: 'Заполните все обязательные поля',
+    },
+    en: {
+      title: 'Book Retreat',
+      name: 'Your Name',
+      email: 'Email',
+      phone: 'Phone (optional)',
+      payNow: 'Pay Now',
+      processing: 'Processing...',
+      cancel: 'Cancel',
+      total: 'Total',
+      secure: 'Secure payment via Fondy',
+      error: 'An error occurred. Please try again.',
+      required: 'Please fill in all required fields',
+    },
+  };
+
+  const bt = bookingTexts[language as keyof typeof bookingTexts] || bookingTexts.en;
 
   useEffect(() => {
     fetchRetreat();
@@ -360,18 +416,173 @@ export default function RetreatDetail() {
               <p className="text-sm sm:text-lg text-[#3a3a35]/70 font-light mb-6 sm:mb-8 max-w-2xl mx-auto">
                 {t.retreatsPage?.ctaDescription || 'Свяжитесь с нами для получения дополнительной информации и бронирования места'}
               </p>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-4 bg-[#c9b896] text-[#3a3a35] hover:bg-[#3a3a35] hover:text-white transition-all duration-300 font-light tracking-wider text-xs sm:text-sm"
-              >
-                {t.retreatsPage?.bookNow || 'Забронировать'}
-                <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button
+                  onClick={() => setShowBookingModal(true)}
+                  className="inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-4 bg-[#c9b896] text-[#3a3a35] hover:bg-[#3a3a35] hover:text-white transition-all duration-300 font-light tracking-wider text-xs sm:text-sm"
+                >
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                  </svg>
+                  {language === 'ru' ? 'Оплатить онлайн' : 'Pay Online'}
+                </button>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-4 border-2 border-[#3a3a35] text-[#3a3a35] hover:bg-[#3a3a35] hover:text-white transition-all duration-300 font-light tracking-wider text-xs sm:text-sm"
+                >
+                  {t.retreatsPage?.bookNow || 'Связаться'}
+                  <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </Link>
+              </div>
             </div>
           </div>
         </section>
+
+        {/* Booking Modal */}
+        {showBookingModal && retreat && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+            <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+              {/* Close Button */}
+              <button
+                onClick={() => {
+                  setShowBookingModal(false);
+                  setBookingError('');
+                }}
+                className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+
+              <div className="p-6 sm:p-8">
+                <h3 className="text-2xl font-light text-[#3a3a35] mb-2">{bt.title}</h3>
+                <p className="text-sm text-[#3a3a35]/60 mb-6">{retreat.title[language]}</p>
+
+                {/* Price Summary */}
+                <div className="bg-[#e8e6e0] rounded-xl p-4 mb-6">
+                  <div className="flex justify-between items-center">
+                    <span className="text-[#3a3a35]/70">{bt.total}</span>
+                    <span className="text-2xl font-light text-[#3a3a35]">{retreat.price}</span>
+                  </div>
+                </div>
+
+                {/* Form */}
+                <form
+                  onSubmit={async (e) => {
+                    e.preventDefault();
+                    setBookingError('');
+                    
+                    if (!bookingForm.name || !bookingForm.email) {
+                      setBookingError(bt.required);
+                      return;
+                    }
+
+                    setBookingLoading(true);
+
+                    try {
+                      const response = await fetch('/api/fondy/checkout', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                          clientName: bookingForm.name,
+                          clientEmail: bookingForm.email,
+                          amount: parsePrice(retreat.price),
+                          currency: getCurrency(retreat.price),
+                          retreatId: retreat._id,
+                          retreatTitle: retreat.title[language],
+                          serviceType: 'retreat',
+                          language,
+                        }),
+                      });
+
+                      const data = await response.json();
+
+                      if (data.success && data.data.checkoutUrl) {
+                        // Redirect to Fondy payment page
+                        window.location.href = data.data.checkoutUrl;
+                      } else {
+                        setBookingError(data.error || bt.error);
+                        setBookingLoading(false);
+                      }
+                    } catch (err) {
+                      setBookingError(bt.error);
+                      setBookingLoading(false);
+                    }
+                  }}
+                  className="space-y-4"
+                >
+                  <div>
+                    <label className="block text-sm text-[#3a3a35]/70 mb-2">{bt.name} *</label>
+                    <input
+                      type="text"
+                      required
+                      value={bookingForm.name}
+                      onChange={(e) => setBookingForm({ ...bookingForm, name: e.target.value })}
+                      className="w-full px-4 py-3 border border-[#3a3a35]/20 rounded-lg focus:border-[#c9b896] focus:outline-none transition-colors text-[#3a3a35]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm text-[#3a3a35]/70 mb-2">{bt.email} *</label>
+                    <input
+                      type="email"
+                      required
+                      value={bookingForm.email}
+                      onChange={(e) => setBookingForm({ ...bookingForm, email: e.target.value })}
+                      className="w-full px-4 py-3 border border-[#3a3a35]/20 rounded-lg focus:border-[#c9b896] focus:outline-none transition-colors text-[#3a3a35]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm text-[#3a3a35]/70 mb-2">{bt.phone}</label>
+                    <input
+                      type="tel"
+                      value={bookingForm.phone}
+                      onChange={(e) => setBookingForm({ ...bookingForm, phone: e.target.value })}
+                      className="w-full px-4 py-3 border border-[#3a3a35]/20 rounded-lg focus:border-[#c9b896] focus:outline-none transition-colors text-[#3a3a35]"
+                    />
+                  </div>
+
+                  {bookingError && (
+                    <div className="p-3 bg-red-50 text-red-600 text-sm rounded-lg">
+                      {bookingError}
+                    </div>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={bookingLoading}
+                    className="w-full py-4 bg-[#c9b896] text-[#3a3a35] rounded-lg hover:bg-[#3a3a35] hover:text-white transition-colors font-light disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  >
+                    {bookingLoading ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                        {bt.processing}
+                      </>
+                    ) : (
+                      <>
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                        {bt.payNow}
+                      </>
+                    )}
+                  </button>
+
+                  <p className="text-xs text-center text-[#3a3a35]/50 flex items-center justify-center gap-1">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                    {bt.secure}
+                  </p>
+                </form>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
       <Footer />
     </>

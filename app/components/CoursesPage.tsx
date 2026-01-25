@@ -6,10 +6,14 @@ import Link from 'next/link';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function CoursesPage() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string>('');
   const [selectedService, setSelectedService] = useState<string>('');
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [paymentForm, setPaymentForm] = useState({ name: '', email: '', phone: '' });
+  const [paymentLoading, setPaymentLoading] = useState(false);
+  const [paymentError, setPaymentError] = useState('');
 
   // Calendar logic
   const today = new Date();
@@ -85,8 +89,72 @@ export default function CoursesPage() {
 
   const handleBooking = () => {
     if (selectedDate && selectedTime && selectedService) {
-      const calendarLink = createGoogleCalendarLink();
-      window.open(calendarLink, '_blank');
+      setShowPaymentModal(true);
+    }
+  };
+
+  const getServicePrice = () => {
+    // Пакети для групових занять
+    if (selectedService === 'group') {
+      return 25; // 1 заняття
+    }
+    // Індивідуальні заняття
+    if (selectedService === 'private') {
+      return 70; // 1 заняття
+    }
+    // Ведична психологія
+    if (selectedService === 'coaching') {
+      return 80; // 1 сесія
+    }
+    // Фізичні тренування
+    if (selectedService === 'training') {
+      return 50; // 1 тренування
+    }
+    return 25; // За замовчуванням
+  };
+
+  const handlePaymentSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setPaymentLoading(true);
+    setPaymentError('');
+
+    try {
+      const serviceName = services.find(s => s.id === selectedService)?.name || '';
+      const price = getServicePrice();
+
+      const response = await fetch('/api/fondy/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          clientName: paymentForm.name,
+          clientEmail: paymentForm.email,
+          clientPhone: paymentForm.phone,
+          amount: price,
+          currency: 'EUR',
+          description: `${serviceName} - ${selectedDate?.toLocaleDateString()} ${selectedTime}`,
+          metadata: {
+            serviceType: 'class',
+            serviceId: selectedService,
+            serviceName,
+            date: selectedDate?.toISOString(),
+            time: selectedTime,
+            calendarLink: createGoogleCalendarLink(),
+          }
+        })
+      });
+
+      if (!response.ok) throw new Error('Payment failed');
+
+      const data = await response.json();
+      
+      // Редирект на Fondy для оплати
+      window.location.href = data.data.checkoutUrl;
+    } catch (error) {
+      console.error('Payment error:', error);
+      setPaymentError(language === 'ru'
+        ? 'Ошибка при создании платежа. Попробуйте снова.' 
+        : 'Payment creation failed. Please try again.');
+      setPaymentLoading(false);
     }
   };
 
@@ -449,6 +517,102 @@ export default function CoursesPage() {
           </div>
         </div>
       </section>
+
+      {/* Payment Modal */}
+      {showPaymentModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 relative">
+            <button
+              onClick={() => setShowPaymentModal(false)}
+              className="absolute top-4 right-4 text-[#3a3a35]/50 hover:text-[#3a3a35]"
+            >
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            <h3 className="text-2xl font-light text-[#3a3a35] mb-6">
+              {language === 'ru' ? 'Оплата занятия' : 'Payment'}
+            </h3>
+
+            <div className="mb-6 p-4 bg-[#e8e6e0] rounded-lg">
+              <p className="text-sm text-[#3a3a35]/70 mb-2">
+                {services.find(s => s.id === selectedService)?.name}
+              </p>
+              <p className="text-sm text-[#3a3a35]/70 mb-2">
+                {selectedDate?.toLocaleDateString(language === 'ru' ? 'ru-RU' : 'en-US')} • {selectedTime}
+              </p>
+              <p className="text-2xl font-light text-[#3a3a35]">
+                €{getServicePrice()}
+              </p>
+            </div>
+
+            <form onSubmit={handlePaymentSubmit} className="space-y-4">
+              <div>
+                <label className="block text-sm text-[#3a3a35]/70 mb-2">
+                  {language === 'ru' ? 'Имя' : 'Name'} *
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={paymentForm.name}
+                  onChange={(e) => setPaymentForm({ ...paymentForm, name: e.target.value })}
+                  className="w-full px-4 py-3 rounded-lg border border-[#3a3a35]/20 focus:border-[#c9b896] focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm text-[#3a3a35]/70 mb-2">
+                  Email *
+                </label>
+                <input
+                  type="email"
+                  required
+                  value={paymentForm.email}
+                  onChange={(e) => setPaymentForm({ ...paymentForm, email: e.target.value })}
+                  className="w-full px-4 py-3 rounded-lg border border-[#3a3a35]/20 focus:border-[#c9b896] focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm text-[#3a3a35]/70 mb-2">
+                  {language === 'ru' ? 'Телефон' : 'Phone'}
+                </label>
+                <input
+                  type="tel"
+                  value={paymentForm.phone}
+                  onChange={(e) => setPaymentForm({ ...paymentForm, phone: e.target.value })}
+                  className="w-full px-4 py-3 rounded-lg border border-[#3a3a35]/20 focus:border-[#c9b896] focus:outline-none"
+                />
+              </div>
+
+              {paymentError && (
+                <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-600">
+                  {paymentError}
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={paymentLoading}
+                className="w-full py-4 bg-[#c9b896] text-[#3a3a35] rounded-lg font-light hover:bg-[#3a3a35] hover:text-white transition-colors disabled:opacity-50"
+              >
+                {paymentLoading 
+                  ? (language === 'ru' ? 'Загрузка...' : 'Loading...') 
+                  : (language === 'ru' ? 'Перейти к оплате' : 'Proceed to Payment')
+                }
+              </button>
+
+              <p className="text-xs text-center text-[#3a3a35]/50">
+                {language === 'ru' 
+                  ? '🔒 Безопасная оплата через Fondy' 
+                  : '🔒 Secure payment via Fondy'
+                }
+              </p>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

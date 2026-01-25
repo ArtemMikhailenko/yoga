@@ -233,7 +233,7 @@ export const en = {
     selectDate: "Please select a date first",
     selectServiceFirst: "Please select a service first",
     selectDateAndService: "Select date and service",
-    confirmBooking: "Book in Google Calendar",
+    confirmBooking: "Pay Online",
     retreatsCtaTitle: "Interested in Retreats?",
     retreatsCtaDescription: "Experience deep transformation through our immersive yoga retreats in sacred locations",
     retreatsCtaButton: "View Retreats",

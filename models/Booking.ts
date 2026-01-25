@@ -10,6 +10,8 @@ export interface IBooking extends mongoose.Document {
   time?: string;
   participants?: number;
   status: 'pending' | 'confirmed' | 'cancelled' | 'completed';
+  paymentStatus?: 'pending' | 'paid' | 'failed' | 'refunded';
+  price?: number;
   totalPrice?: number;
   notes?: string;
   createdAt: Date;
@@ -41,7 +43,7 @@ const BookingSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    required: true,
+    default: Date.now,
   },
   time: {
     type: String,
@@ -55,6 +57,15 @@ const BookingSchema = new mongoose.Schema({
     type: String,
     enum: ['pending', 'confirmed', 'cancelled', 'completed'],
     default: 'pending',
+  },
+  paymentStatus: {
+    type: String,
+    enum: ['pending', 'paid', 'failed', 'refunded'],
+    default: 'pending',
+  },
+  price: {
+    type: Number,
+    required: false,
   },
   totalPrice: {
     type: Number,
