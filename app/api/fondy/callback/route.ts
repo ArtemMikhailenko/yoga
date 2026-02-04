@@ -3,6 +3,7 @@ import dbConnect from '@/lib/mongodb';
 import Payment from '@/models/Payment';
 import Booking from '@/models/Booking';
 import { verifyFondySignature, parseFondyStatus } from '@/lib/fondy';
+import { createCalendarEvent } from '@/lib/googleCalendar';
 
 // Fondy sends callback as form data or JSON
 async function parseCallback(request: NextRequest): Promise<Record<string, string>> {
@@ -100,6 +101,43 @@ export async function POST(request: NextRequest) {
     }
 
     await payment.save();
+
+    // Create Google Calendar event if payment completed for class booking
+    if (newStatus === 'completed' && !wasCompleted && payment.metadata?.serviceType === 'class') {
+      try {
+        const { serviceName, date, time } = payment.metadata;
+        
+        if (date && time) {
+          const bookingDate = new Date(date);
+          const [hours, minutes] = time.split(':').map(Number);
+          bookingDate.setHours(hours, minutes, 0, 0);
+          
+          const endDate = new Date(bookingDate);
+          endDate.setHours(endDate.getHours() + 1); // 1 hour session
+          
+          const eventId = await createCalendarEvent({
+            summary: `${serviceName} - ${payment.clientName}`,
+            description: `Yoga session: ${serviceName}\nClient: ${payment.clientName}\nEmail: ${payment.clientEmail}\nPhone: ${payment.metadata?.clientPhone || 'N/A'}\nPayment: ${order_id}`,
+            start: bookingDate,
+            end: endDate,
+            attendeeEmail: payment.clientEmail,
+            attendeeName: payment.clientName,
+            location: 'Pfeilgasse 14, 1080, Vienna, Austria',
+          });
+          
+          // Save event ID to payment
+          if (eventId) {
+            payment.metadata.googleEventId = eventId;
+            await payment.save();
+            
+            console.log(`Google Calendar event created: ${eventId}`);
+          }
+        }
+      } catch (calendarError) {
+        console.error('Failed to create Google Calendar event:', calendarError);
+        // Don't fail the whole callback, just log the error
+      }
+    }
 
     // Update related booking if exists
     if (payment.metadata?.retreatId) {

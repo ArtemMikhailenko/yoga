@@ -14,6 +14,7 @@ export interface IBooking extends mongoose.Document {
   price?: number;
   totalPrice?: number;
   notes?: string;
+  googleEventId?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -72,6 +73,10 @@ const BookingSchema = new mongoose.Schema({
     required: false,
   },
   notes: {
+    type: String,
+    required: false,
+  },
+  googleEventId: {
     type: String,
     required: false,
   },

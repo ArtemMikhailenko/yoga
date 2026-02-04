@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '../context/LanguageContext';
@@ -14,6 +14,10 @@ export default function CoursesPage() {
   const [paymentForm, setPaymentForm] = useState({ name: '', email: '', phone: '' });
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [paymentError, setPaymentError] = useState('');
+  
+  // Занятые времена из Google Calendar
+  const [busyTimes, setBusyTimes] = useState<string[]>([]);
+  const [loadingTimes, setLoadingTimes] = useState(false);
 
   // Calendar logic
   const today = new Date();
@@ -30,7 +34,12 @@ export default function CoursesPage() {
   ];
   const dayNames = t.coursesPage?.dayNames || ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
-  const availableTimes = ['09:00', '10:30', '12:00', '17:00', '18:30', '20:00'];
+  const availableTimes = [
+    '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
+    '12:00', '12:30', '13:00', '13:30', '14:00', '14:30',
+    '15:00', '15:30', '16:00', '16:30', '17:00', '17:30',
+    '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00'
+  ];
 
   const services = [
     { id: 'group', name: t.coursesPage?.groupTitle || 'Group Yoga Classes' },
@@ -38,6 +47,48 @@ export default function CoursesPage() {
     { id: 'coaching', name: t.coursesPage?.coachingTitle || 'Vedic Psychology' },
     { id: 'training', name: t.coursesPage?.trainingTitle || 'Physical Training' },
   ];
+
+  // Загружаем занятые времена при выборе даты
+  useEffect(() => {
+    if (selectedDate) {
+      fetchBusyTimes(selectedDate);
+    }
+  }, [selectedDate]);
+
+  const fetchBusyTimes = async (date: Date) => {
+    setLoadingTimes(true);
+    try {
+      // Форматируем дату локально, чтобы избежать проблем с часовым поясом
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const dateStr = `${year}-${month}-${day}`;
+      
+      console.log('Fetching busy times for:', dateStr);
+      const response = await fetch(`/api/calendar?date=${dateStr}`);
+      const data = await response.json();
+      console.log('Busy times response:', data);
+      
+      if (data.success && data.busyTimes) {
+        console.log('Setting busy times:', data.busyTimes);
+        setBusyTimes(data.busyTimes);
+      } else {
+        setBusyTimes([]);
+      }
+    } catch (error) {
+      console.error('Error fetching busy times:', error);
+      setBusyTimes([]);
+    } finally {
+      setLoadingTimes(false);
+    }
+  };
+
+  // Проверяем, занято ли время
+  const isTimeBusy = (time: string): boolean => {
+    const isBusy = busyTimes.includes(time);
+    if (isBusy) console.log('Time is busy:', time);
+    return isBusy;
+  };
 
   const handlePrevMonth = () => {
     if (currentMonth === 0) {
@@ -60,31 +111,7 @@ export default function CoursesPage() {
   const handleDateClick = (day: number) => {
     const selected = new Date(currentYear, currentMonth, day);
     setSelectedDate(selected);
-  };
-
-  const createGoogleCalendarLink = () => {
-    if (!selectedDate || !selectedTime || !selectedService) return '';
-
-    const [hours, minutes] = selectedTime.split(':');
-    const startDateTime = new Date(selectedDate);
-    startDateTime.setHours(parseInt(hours), parseInt(minutes), 0);
-    
-    const endDateTime = new Date(startDateTime);
-    endDateTime.setHours(startDateTime.getHours() + 1); // 1 hour duration
-
-    const formatDateTime = (date: Date) => {
-      return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
-    };
-
-    const serviceName = services.find(s => s.id === selectedService)?.name || '';
-    const title = encodeURIComponent(`${serviceName} - Yoga with Vladyslav`);
-    const details = encodeURIComponent(`Yoga session: ${serviceName}\nTeacher: Vladyslav Changeliya\nLocation: Pfeilgasse 14, 1080, Vienna, Austria\nContact: +43 677 62770954`);
-    const location = encodeURIComponent('Pfeilgasse 14, 1080, Vienna, Austria');
-
-    const startTime = formatDateTime(startDateTime);
-    const endTime = formatDateTime(endDateTime);
-
-    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startTime}/${endTime}&details=${details}&location=${location}`;
+    setSelectedTime(''); // Сбрасываем выбранное время при смене даты
   };
 
   const handleBooking = () => {
@@ -138,7 +165,6 @@ export default function CoursesPage() {
             serviceName,
             date: selectedDate?.toISOString(),
             time: selectedTime,
-            calendarLink: createGoogleCalendarLink(),
           }
         })
       });
@@ -450,28 +476,49 @@ export default function CoursesPage() {
                 
                 {selectedDate && selectedService ? (
                   <div className="space-y-2">
-                    {availableTimes.map((time) => (
-                      <button
-                        key={time}
-                        onClick={() => setSelectedTime(time)}
-                        className={`w-full py-2.5 sm:py-3 px-3 sm:px-4 rounded-lg text-xs sm:text-sm font-light transition-all
-                          ${selectedTime === time 
-                            ? 'bg-[#c9b896] text-[#3a3a35]' 
-                            : 'bg-white/5 text-white hover:bg-white/10'
-                          }
-                        `}
-                      >
-                        {time}
-                      </button>
-                    ))}
+                    {loadingTimes ? (
+                      <div className="flex items-center justify-center py-8">
+                        <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      </div>
+                    ) : (
+                      <>
+                        <div className="max-h-[320px] overflow-y-auto space-y-2 pr-2 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
+                          {availableTimes.map((time) => {
+                            const busy = isTimeBusy(time);
+                            return (
+                              <button
+                                key={time}
+                                onClick={() => !busy && setSelectedTime(time)}
+                                disabled={busy}
+                                className={`w-full py-2.5 sm:py-3 px-3 sm:px-4 rounded-lg text-xs sm:text-sm font-light transition-all relative
+                                  ${busy 
+                                    ? 'bg-red-500/20 text-red-300 cursor-not-allowed line-through' 
+                                    : selectedTime === time 
+                                      ? 'bg-[#c9b896] text-[#3a3a35]' 
+                                      : 'bg-white/5 text-white hover:bg-white/10'
+                                  }
+                                `}
+                              >
+                                {time}
+                                {busy && (
+                                  <span className="absolute right-3 text-[10px] uppercase tracking-wider">
+                                    {language === 'ru' ? 'Занято' : 'Booked'}
+                                  </span>
+                                )}
+                              </button>
+                            );
+                          })}
+                        </div>
 
-                    {selectedTime && (
-                      <button
-                        onClick={handleBooking}
-                        className="w-full mt-4 sm:mt-6 py-3 sm:py-4 bg-[#c9b896] text-[#3a3a35] rounded-lg text-sm font-light hover:bg-white transition-colors"
-                      >
-                        {(t.coursesPage as any)?.confirmBooking || 'Confirm Booking'}
-                      </button>
+                        {selectedTime && (
+                          <button
+                            onClick={handleBooking}
+                            className="w-full mt-4 sm:mt-6 py-3 sm:py-4 bg-[#c9b896] text-[#3a3a35] rounded-lg text-sm font-light hover:bg-white transition-colors"
+                          >
+                            {(t.coursesPage as any)?.confirmBooking || 'Confirm Booking'}
+                          </button>
+                        )}
+                      </>
                     )}
                   </div>
                 ) : (
