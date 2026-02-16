@@ -407,36 +407,6 @@ export default function RetreatDetail() {
                 </ul>
               </div>
             )}
-
-            {/* CTA */}
-            <div className="text-center p-6 sm:p-12 bg-gradient-to-br from-white/60 to-white/30 backdrop-blur-sm border border-[#3a3a35]/10">
-              <h3 className="text-2xl sm:text-3xl font-light text-[#3a3a35] mb-3 sm:mb-4">
-                {t.retreatsPage?.ctaTitle || 'Готовы к Трансформации?'}
-              </h3>
-              <p className="text-sm sm:text-lg text-[#3a3a35]/70 font-light mb-6 sm:mb-8 max-w-2xl mx-auto">
-                {t.retreatsPage?.ctaDescription || 'Свяжитесь с нами для получения дополнительной информации и бронирования места'}
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button
-                  onClick={() => setShowBookingModal(true)}
-                  className="inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-4 bg-[#c9b896] text-[#3a3a35] hover:bg-[#3a3a35] hover:text-white transition-all duration-300 font-light tracking-wider text-xs sm:text-sm"
-                >
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                  </svg>
-                  {language === 'ru' ? 'Оплатить онлайн' : 'Pay Online'}
-                </button>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-4 border-2 border-[#3a3a35] text-[#3a3a35] hover:bg-[#3a3a35] hover:text-white transition-all duration-300 font-light tracking-wider text-xs sm:text-sm"
-                >
-                  {t.retreatsPage?.bookNow || 'Связаться'}
-                  <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </Link>
-              </div>
-            </div>
           </div>
         </section>
 

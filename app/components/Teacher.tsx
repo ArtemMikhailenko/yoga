@@ -52,7 +52,7 @@ export default function Teacher() {
             
             {/* CTA Button */}
             <Link
-              href="#schedule"
+              href="/courses#booking"
               className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-3.5 bg-[#2a2a25] text-white hover:bg-[#3a3a35] transition-colors duration-300 font-light tracking-[0.1em] sm:tracking-[0.15em] text-xs sm:text-sm"
             >
               {t.teacher.cta}

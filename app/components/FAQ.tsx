@@ -25,10 +25,6 @@ export default function FAQ() {
       question: t.faq.items[3].question,
       answer: t.faq.items[3].answer,
     },
-    {
-      question: t.faq.items[4].question,
-      answer: t.faq.items[4].answer,
-    },
   ];
 
   return (

@@ -49,7 +49,7 @@ export default function Hero() {
             {/* CTA Button */}
             <div className="pt-4 sm:pt-6">
               <Link
-                href="#program"
+                href="/courses#booking"
                 className="group inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-12 py-3 sm:py-3.5 border border-white/60 text-white hover:bg-white hover:text-black transition-all duration-500 font-light tracking-[0.1em] sm:tracking-[0.2em] text-xs sm:text-sm backdrop-blur-sm"
               >
                 {t.hero.cta}

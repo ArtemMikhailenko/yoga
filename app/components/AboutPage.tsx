@@ -51,10 +51,13 @@ export default function AboutPage() {
                   {t.aboutPage.philosophyTitle}
                 </h2>
                 <p className="text-sm sm:text-lg text-[#3a3a35]/80 font-light leading-relaxed mb-4 sm:mb-6">
-                  {t.about.leftDescription}
+                  {t.aboutPage.bio1}
+                </p>
+                <p className="text-sm sm:text-lg text-[#3a3a35]/80 font-light leading-relaxed mb-4 sm:mb-6">
+                  {t.aboutPage.bio2}
                 </p>
                 <p className="text-sm sm:text-lg text-[#3a3a35]/80 font-light leading-relaxed">
-                  {t.about.rightDescription}
+                  {t.aboutPage.bio3}
                 </p>
               </div>
             </div>
@@ -117,9 +120,17 @@ export default function AboutPage() {
               <div className="space-y-4 sm:space-y-6">
                 <div className="flex gap-3 sm:gap-4">
                   <div className="w-1 bg-[#c9b896]" />
-                  <p className="text-sm sm:text-base text-white/80 leading-relaxed font-light">
-                    {t.teacher.description}
-                  </p>
+                  <div className="space-y-4 sm:space-y-6">
+                    <p className="text-sm sm:text-base text-white/80 leading-relaxed font-light">
+                      {t.aboutPage.bio4}
+                    </p>
+                    <p className="text-sm sm:text-base text-white/80 leading-relaxed font-light">
+                      {t.aboutPage.bio5}
+                    </p>
+                    <p className="text-sm sm:text-base text-white/80 leading-relaxed font-light">
+                      {t.aboutPage.bio6}
+                    </p>
+                  </div>
                 </div>
               </div>
 

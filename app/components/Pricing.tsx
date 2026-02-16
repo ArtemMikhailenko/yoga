@@ -24,6 +24,12 @@ export default function Pricing() {
       price: t.pricing.plans[2].price,
       features: t.pricing.plans[2].features,
     },
+    {
+      number: '04',
+      name: t.pricing.plans[3].name,
+      price: t.pricing.plans[3].price,
+      features: t.pricing.plans[3].features,
+    },
   ];
 
   return (
@@ -35,7 +41,7 @@ export default function Pricing() {
         </h2>
 
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
           {plans.map((plan, index) => (
             <div
               key={index}

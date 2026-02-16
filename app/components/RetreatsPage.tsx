@@ -216,27 +216,6 @@ export default function RetreatsPage() {
           )}
         </div>
       </section>
-
-      {/* CTA Section */}
-      <section className="px-4 sm:px-6 py-16 sm:py-24 bg-gradient-to-b from-transparent to-[#3a3a35]/5">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light text-[#3a3a35] mb-4 sm:mb-6">
-            {t.retreatsPage?.ctaTitle || 'Готовы к Трансформации?'}
-          </h2>
-          <p className="text-sm sm:text-lg text-[#3a3a35]/70 font-light mb-6 sm:mb-8 max-w-2xl mx-auto px-4">
-            {t.retreatsPage?.ctaDescription || 'Свяжитесь с нами для получения дополнительной информации и бронирования места'}
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-4 bg-[#c9b896] text-[#3a3a35] hover:bg-[#3a3a35] hover:text-white transition-all duration-300 font-light tracking-wider text-xs sm:text-sm"
-          >
-            {t.retreatsPage?.ctaButton || 'Связаться'}
-            <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </Link>
-        </div>
-      </section>
     </div>
   );
 }

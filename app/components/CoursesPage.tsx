@@ -375,7 +375,7 @@ export default function CoursesPage() {
       </section>
 
       {/* Booking Calendar Section */}
-      <section className="py-12 sm:py-24 px-4 sm:px-6 bg-gradient-to-br from-[#3a3a35] to-[#2a2a25]">
+      <section id="booking" className="py-12 sm:py-24 px-4 sm:px-6 bg-gradient-to-br from-[#3a3a35] to-[#2a2a25]">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-8 sm:mb-12">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-3 sm:mb-4">

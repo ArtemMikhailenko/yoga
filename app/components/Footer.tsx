@@ -38,23 +38,15 @@ export default function Footer() {
               <ul className="space-y-3">
                 <li>
                   <Link
-                    href="#about"
+                    href="/about"
                     className="text-sm text-[#3a3a35]/70 hover:text-[#3a3a35] transition-colors font-light"
                   >
-                    {t.footer.about}
+                    {t.footer.author}
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="#results"
-                    className="text-sm text-[#3a3a35]/70 hover:text-[#3a3a35] transition-colors font-light"
-                  >
-                    {t.footer.results}
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#program"
+                    href="/courses"
                     className="text-sm text-[#3a3a35]/70 hover:text-[#3a3a35] transition-colors font-light"
                   >
                     {t.footer.program}
@@ -62,10 +54,18 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="#format"
+                    href="/retreats"
                     className="text-sm text-[#3a3a35]/70 hover:text-[#3a3a35] transition-colors font-light"
                   >
-                    {t.footer.format}
+                    {t.header.nav.retreats}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/contact"
+                    className="text-sm text-[#3a3a35]/70 hover:text-[#3a3a35] transition-colors font-light"
+                  >
+                    {t.footer.contacts}
                   </Link>
                 </li>
               </ul>
@@ -75,36 +75,9 @@ export default function Footer() {
             <div>
               <ul className="space-y-3">
                 <li>
-                  <Link
-                    href="#author"
-                    className="text-sm text-[#3a3a35]/70 hover:text-[#3a3a35] transition-colors font-light"
-                  >
-                    {t.footer.author}
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#pricing"
-                    className="text-sm text-[#3a3a35]/70 hover:text-[#3a3a35] transition-colors font-light"
-                  >
-                    {t.footer.pricing}
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#reviews"
-                    className="text-sm text-[#3a3a35]/70 hover:text-[#3a3a35] transition-colors font-light"
-                  >
-                    {t.footer.reviews}
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#contacts"
-                    className="text-sm text-[#3a3a35]/70 hover:text-[#3a3a35] transition-colors font-light"
-                  >
-                    {t.footer.contacts}
-                  </Link>
+                  <p className="text-sm text-[#3a3a35]/50 font-light">
+                    {t.footer.address}
+                  </p>
                 </li>
               </ul>
             </div>
@@ -114,7 +87,7 @@ export default function Footer() {
               <ul className="space-y-3">
                 <li>
                   <a
-                    href="tel:+436776277095 4"
+                    href="tel:+4367762770954"
                     className="text-sm text-[#3a3a35]/70 hover:text-[#3a3a35] transition-colors font-light"
                   >
                     {t.footer.phone}
