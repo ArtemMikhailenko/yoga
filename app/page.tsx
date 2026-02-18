@@ -9,6 +9,7 @@ import Benefits from "./components/Benefits";
 import FAQ from "./components/FAQ";
 import Pricing from "./components/Pricing";
 import Footer from "./components/Footer";
+import Testimonials from "./components/Testimonials";
 import HeroBanner from "./components/HeroBanner";
 import HeroPod from "./components/HeroPod";
 
@@ -26,6 +27,7 @@ export default function Home() {
         <Teacher />
         <Classes />
         <Pricing />
+        <Testimonials />
         <Benefits />
         <FAQ />
       </main>

@@ -99,6 +99,99 @@ export const en = {
       },
     ],
   },
+  testimonials: {
+    title: "Voices of Practice",
+    subtitle: "Words from the heart",
+    showMore: "Show all reviews",
+    showLess: "Collapse",
+    categories: {
+      spiritual: "Spiritual Growth",
+      influence: "Inspiration",
+      gratitude: "Gratitude",
+    },
+    items: [
+      {
+        text: "On a metaphysical level, I received so much more. Thank you for the practice, the knowledge, and the atmosphere of your classes. This is not just a review — it's gratitude from the heart.",
+        category: "spiritual",
+      },
+      {
+        text: "Yoga with you is not a set of exhausting asanas — it's an energetic flow. The teacher's energy helps, connects you to inner work, self-discovery, and self-attunement.",
+        category: "spiritual",
+      },
+      {
+        text: "I always come to your yoga as a spiritual practice. I observe myself, I realize a lot. I'm learning to accept myself, as you advised. I'm very grateful for that.",
+        category: "spiritual",
+      },
+      {
+        text: "For me, it's a complete immersion — both on a physical and a spiritual level.",
+        category: "spiritual",
+      },
+      {
+        text: "The spiritual world is subtly touched simultaneously with physical exercises. I'm absolutely delighted.",
+        category: "spiritual",
+      },
+      {
+        text: "For me, a retreat is always like a separate little space where you are alone with yourself. Where the boundaries of perception expand. It's a wonderful opportunity to look at the world and yourself from a different angle. To run a diagnostic of your life, actions, thoughts. To ask yourself: what can I do differently, better, more alive? To meet the needs of your soul — to feel them. This is so important in our time of endless information noise.",
+        category: "spiritual",
+      },
+      {
+        text: "Your soul and heart guide you on the right path, God leads. You follow your calling. You transmit blessings into other hearts. Thank you for your choices.",
+        category: "spiritual",
+      },
+      {
+        text: "You are a conduit of God's energy to the earth, into matter. You approach the fulfillment of your duty responsibly — or more accurately, your dharma.",
+        category: "spiritual",
+      },
+      {
+        text: "Thank you for opening the door to Bhakti Yoga. In our time, it would be much harder without God. Thank you for the guidance and willingness to speak about God.",
+        category: "spiritual",
+      },
+      {
+        text: "Thank you for the bridge from the material to the spiritual. Thank you for the transformation.",
+        category: "spiritual",
+      },
+      {
+        text: "That's why people love you so much. And more and more people are drawn to you. You put your soul into everyone and are attentive to each person. You treat your work as a calling. You've devoted your life to yoga and everything connected to it. Everything you do is yoga. People follow you. They love and respect you. I think this is only the beginning. You will have students and successors of your great cause. You will write books and set many on the right path. Your honest work will go down in history.",
+        category: "influence",
+      },
+      {
+        text: "It's rare when a teacher combines professionalism with human qualities. You know how to love people and help them on all levels. Your personal growth inspires others to become the best version of themselves.",
+        category: "influence",
+      },
+      {
+        text: "You have a very powerful gaze. An incredibly strong energy comes from your eyes.",
+        category: "influence",
+      },
+      {
+        text: "I read and listen with tears in my eyes. Thank you. From the bottom of my heart, I wish you health and good fortune. A deep bow to your parents — they raised a true Human being.",
+        category: "influence",
+      },
+      {
+        text: "I come to you because I value you as a person, I respect you and listen to your opinion. I admire your patience, confidence, and ability to connect with practically everyone.",
+        category: "influence",
+      },
+      {
+        text: "Your field is very important for us. It pulls us in, like home.",
+        category: "influence",
+      },
+      {
+        text: "I want to thank you from the bottom of my heart for the work, love, care and warmth you give in class. I'm so happy and grateful to God and fate for meeting you, especially in this difficult period of life. I can't express in words how important the practice is for me — both physically and spiritually.",
+        category: "gratitude",
+      },
+      {
+        text: "I read that today it's important to thank teachers. And I thank you for all the knowledge, for your path, and for being part of mine.",
+        category: "gratitude",
+      },
+      {
+        text: "Immeasurable gratitude for the support and contribution to my spiritual growth. My soul found a soul it can follow.",
+        category: "gratitude",
+      },
+      {
+        text: "Only toward the end of my time in Vienna did I learn about you and your classes. Perhaps late — but that means right on time. It was meant to be.",
+        category: "gratitude",
+      },
+    ],
+  },
   footer: {
     about: "About Course",
     results: "Results",
