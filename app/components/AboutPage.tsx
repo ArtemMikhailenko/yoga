@@ -260,7 +260,7 @@ export default function AboutPage() {
               </svg>
             </Link>
             <Link
-              href="/#pricing"
+              href="/courses"
               className="inline-flex items-center justify-center gap-3 px-12 py-5 border-2 border-white text-white hover:bg-white hover:text-[#3a3a35] transition-all duration-300 font-light tracking-wider text-sm"
             >
               {t.aboutPage.ctaPricing}

@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function Pricing() {
@@ -33,7 +34,7 @@ export default function Pricing() {
   ];
 
   return (
-    <section className="relative w-full min-h-screen lg:h-screen bg-[#e8e6e0] py-16 sm:py-16 px-4 sm:px-6 lg:px-20 flex items-center">
+    <section id="pricing" className="relative w-full min-h-screen lg:h-screen bg-[#e8e6e0] py-16 sm:py-16 px-4 sm:px-6 lg:px-20 flex items-center">
       <div className="max-w-7xl mx-auto w-full">
         {/* Title */}
         <h2 className="text-3xl sm:text-4xl lg:text-6xl font-light text-[#3a3a35] mb-8 sm:mb-12 lg:mb-16">
@@ -104,11 +105,17 @@ export default function Pricing() {
                 </ul>
               </div>
 
-              {/* Card Price */}
-              <div className="border-t border-[#3a3a35]/20 p-6 lg:p-8">
+              {/* Card Price + CTA */}
+              <div className="border-t border-[#3a3a35]/20 p-6 lg:p-8 space-y-4">
                 <div className="text-xl lg:text-2xl font-light text-[#3a3a35] tracking-wide">
                   {plan.price}
                 </div>
+                <Link
+                  href="/courses#booking"
+                  className="block w-full text-center px-4 py-3 bg-[#3a3a35] text-white text-xs sm:text-sm tracking-wider uppercase hover:bg-[#c9b896] hover:text-[#3a3a35] transition-all duration-300 font-light"
+                >
+                  {t.pricing.cta || 'Записаться'}
+                </Link>
               </div>
             </div>
           ))}

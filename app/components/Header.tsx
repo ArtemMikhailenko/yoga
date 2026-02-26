@@ -54,6 +54,13 @@ export default function Header() {
             <span className="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all group-hover:w-full"></span>
           </Link>
           <Link 
+            href="/#testimonials" 
+            className="text-white/80 hover:text-white transition-all text-sm font-light tracking-wide relative group"
+          >
+            {t.header.nav.reviews}
+            <span className="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all group-hover:w-full"></span>
+          </Link>
+          <Link 
             href="/contact" 
             className="text-white/80 hover:text-white transition-all text-sm font-light tracking-wide relative group"
           >
@@ -138,6 +145,13 @@ export default function Header() {
               onClick={() => setIsMenuOpen(false)}
             >
               {t.header.nav.retreats}
+            </Link>
+            <Link 
+              href="/#testimonials" 
+              className="text-white/90 hover:text-white transition-colors text-base font-light"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {t.header.nav.reviews}
             </Link>
             <Link 
               href="/contact" 
